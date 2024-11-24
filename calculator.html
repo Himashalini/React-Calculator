@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            align-items: center; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+            height: 100vh;
+            margin: 0px;
+        }
+        div
+        {
+            background-color: grey;
+            height: 504px;
+            width: 400px;
+            border-radius: 10px;
+        }
+        table
+        {
+            background-color: rgb(85, 82, 82);
+            width: 400px;
+            border-radius: 20px;
+        }
+        td {
+            color: white;
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 25px;
+            background-color: rgb(122, 118, 118);
+        }
+        #screen
+        {
+            background-color: #ffffff;
+            color: black;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <div>
+    <table>
+       <tr>
+        <td colspan="4" id="screen" aria-readonly="true">0</td>
+       </tr>
+       <tr>
+        <td onclick="append('1')">1</td>
+        <td onclick="append('2')">2</td>
+        <td onclick="append('3')">3</td>
+        <td onclick="append('4')">4</td>
+       </tr>
+       <tr>
+        <td onclick="append('5')">5</td>
+        <td onclick="append('6')">6</td>
+        <td onclick="append('7')">7</td>
+        <td onclick="append('8')">8</td>
+       </tr>
+       <tr>
+        <td onclick="append('+')">+</td>
+        <td onclick="append('9')">9</td>
+        <td onclick="append('0')">0</td>
+        <td onclick="append('-')">-</td>
+       </tr>
+       <tr>
+        <td onclick="append('*')">*</td>
+        <td onclick="append('%')">%</td>
+        <td onclick="append('/')">/</td>
+        <td onclick="append('.')">.</td>
+       </tr>
+       <tr>
+        <td onclick="lastDelete()">D</td>
+        <td onclick="clearScreen()">C</td>
+        <td onclick="calculate()" colspan="2">=</td>
+       </tr>
+    </table>
+</div>
+<script>
+ let screenContent="0";
+ function updateScreen()
+ {
+  document.getElementById("screen").innerHTML=screenContent;
+ }
+ function append(value)
+ {
+if(screenContent==="0" && !isNaN(value))
+{
+  screenContent=value;
+}
+else
+{
+  screenContent+=value;
+}
+updateScreen();
+}
+function clearScreen()
+{
+  screenContent="0";
+  updateScreen();
+}
+function lastDelete()
+{
+  if(screenContent.length>1)
+{
+  screenContent=screenContent.slice(0,-1);
+}
+else
+{
+  screenContent=0;
+}
+updateScreen();
+}
+function calculate()
+{
+  try
+  {
+    screenContent=eval(screenContent).toString();
+  }
+  catch
+  {
+    screenContent="Error";
+  }
+  updateScreen();
+}
+</script>
+</body>
+</html>
